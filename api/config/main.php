@@ -16,10 +16,10 @@ return [
         'request' => [
             'parsers' => [
                 'application/json' => 'yii\web\JsonParser',
-                'text/xml' => 'yii\web\XmlParser',
+                'application/xml' => 'yii\web\XmlParser',
             ],            
         ],
-        'response' => [
+        'response' => [            
             'formatters' => [
                 'json' => [
                     'class' => 'yii\web\JsonResponseFormatter',
