@@ -5,6 +5,8 @@ namespace common\models;
 use Yii;
 use yii\behaviors\TimestampBehavior;
 use common\models\query\PostQuery;
+use yii\web\Linkable;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "post".
@@ -18,7 +20,7 @@ use common\models\query\PostQuery;
  *
  * @property User $user
  */
-class Post extends \yii\db\ActiveRecord
+class Post extends \yii\db\ActiveRecord implements Linkable
 {
     /**
      * @inheritdoc
@@ -75,5 +77,19 @@ class Post extends \yii\db\ActiveRecord
     public static function find()
     {
         return new PostQuery(get_called_class());
+    }
+    
+    public function extraFields()
+    {
+        return [
+            'author' => 'user',
+        ];
+    }
+
+    public function getLinks()
+    {
+        return [
+            'self' => Url::to(['post/view', 'id' => $this->id], true),
+        ];
     }
 }
